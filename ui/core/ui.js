@@ -242,9 +242,9 @@ channelPanel.prototype = Object.create (panel.prototype);
  */
 function channelPanel (button_, panel_) {
 	panel.call (this, button_, panel_);
-  this.bluetooth = get ('#bluetoothButton');
+  // this.bluetooth = get ('#bluetoothButton');
   this.serial = get ('#serialButton');
-  this.network = get ('#networkButton');
+  // this.network = get ('#networkButton');
   this.hidePanel = (target_) => {
     this.panel.id = '';
     this.button.className = `icon ${target_}`;
@@ -252,9 +252,9 @@ function channelPanel (button_, panel_) {
   };
 
   this.button.className = `icon ${Channel ['mux'].currentChannel}`;
-  this.bluetooth.onclick = () => {this.hidePanel ('webbluetooth'); Channel ['mux'].switch('webbluetooth');};
+  // this.bluetooth.onclick = () => {this.hidePanel ('webbluetooth'); Channel ['mux'].switch('webbluetooth');};
   this.serial.onclick = () => {this.hidePanel ('webserial'); Channel ['mux'].switch('webserial');};
-  this.network.onclick = () => {this.hidePanel ('websocket'); Channel['mux'].switch('websocket');};
+  // this.network.onclick = () => {this.hidePanel ('websocket'); Channel['mux'].switch('websocket');};
 }
 
 

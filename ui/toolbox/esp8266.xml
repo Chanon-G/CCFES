@@ -267,7 +267,7 @@
 
     <sep></sep>
 
-   <category name="BIPES">
+   <category name="Info">
     <block type="project_metadata">
       <field name="NAME">Project INFO</field>
       <value name="project_author">
@@ -287,8 +287,7 @@
       </value>
     </block>
 
-    <block type="bipes_plot">
-    </block>
+    
    </category>
 
     <sep></sep>
@@ -297,7 +296,7 @@
     <category name="Machine" colour="%{BKY_VARIABLES_HUE}">
     -->
 
-  <category name="Python">
+  <!-- <category name="Python">
       <label text="Python"></label>
     <block type="exec_python">
   <value name="command">
@@ -336,10 +335,10 @@
       </value>
     </block>
 
-  </category>
+  </category> -->
 
 
-  <category name="Timing">
+  <!-- <category name="Timing">
     <label text="Timing"></label>
     <block type="utime.delay">
        <value name="TIME">
@@ -384,10 +383,10 @@
         </shadow>
       </value>
     </block>
-  </category>
+  </category> -->
 
   <category name="Machine">
-      <label text="Machine"></label>
+      <!-- <label text="Machine"></label>
       <category name="CPU">
       <label text="ESP8266 CPU"></label>
 
@@ -407,7 +406,7 @@
     <block type="reset_cause_hard"></block>
     <block type="reset_cause_wdt"></block>
     <block type="reset_cause_deep"></block>
-      </category>
+      </category> -->
     
       <category name="In/Out Pins">
       <label text="In/Out Pins"></label>
@@ -507,7 +506,7 @@
 </category>
 
 
-<category name="Displays">
+<!-- <category name="Displays">
 
 <category name="NeoPixel LED Strip">
       <label text="NeoPixel RGB LED Strip"></label>
@@ -922,7 +921,7 @@
 
 
 
-  </category>
+  </category> -->
 
   <category name="Sensors">
     <category name="DHT11/22 Sensor">
@@ -945,10 +944,10 @@
         <field name="MSG_READ_DHT_HUMI">Read DHT11/22 Humidity</field>
       </block>
     </category>
-<!--Adicionando os blocos do Anenmômetro-->
+<!--Adicionando os blocos do Anenmômetro
     <category name="Anemômetro">
     <label text="Anenômetro"></label>
-<!--Iniciar Anemômetro-->
+Iniciar Anemômetro
     <block type="anemo_init">
         <value name="Função">
           <shadow type="text">
@@ -961,7 +960,7 @@
           </shadow>
         </value>
       </block>
-<!--Parar Anemômetro-->
+Parar Anemômetro
       <block type="anemo_stop">
         <value name="Função">
           <shadow type="text">
@@ -970,10 +969,10 @@
         </value>
       </block>
   </category>
-<!--Adicionando os blocos do Pluviômetro--> 
+Adicionando os blocos do Pluviômetro
   <category name="Pluviômetro">
     <label text= "Pluviômetro"></label>
-<!--Iniciar Pluviômetro-->
+Iniciar Pluviômetro
     <block type="pluvio_init">
         <value name="Função">
           <shadow type="text">
@@ -986,7 +985,7 @@
           </shadow>
         </value>
       </block>
-<!--Parar Pluviômetro-->
+Parar Pluviômetro
       <block type="pluvio_stop">
         <value name="Função">
           <shadow type="text">
@@ -994,9 +993,9 @@
           </shadow>
         </value>
       </block>
-  </category>
+  </category>-->
 
-  <category name="Ultrasound">
+  <!-- <category name="Ultrasound">
       <label text="HCSR04 ultrasound distance sensor"></label>
       <label text="Library: https://github.com/rsc1975/micropython-hcsr04"></label>
         <button text="Install HCSR04 library" callbackKey="installPyLib"></button>
@@ -1198,8 +1197,8 @@
       </block>
       <block type="encoder_reset"></block>
       <block type="encoder_read"></block>
-  </category>
-  </category>
+  </category>-->
+  </category> 
 
 
 
@@ -1235,7 +1234,7 @@
   </category>
 
 
-  <category name="Stepper Motor">
+  <!-- <category name="Stepper Motor">
       <label text="Stepper Motor"></label>
     <block type="stepper_init">
       <value name="p0">
@@ -1267,7 +1266,7 @@
         </shadow>
       </value>
     </block>
-  </category>
+  </category> -->
 
   <category name="DC Motor">
       <label text="DC Motor"></label>
@@ -1310,7 +1309,7 @@ _
     </block>
   </category>
 
-  <category name="Sounds">
+  <!-- <category name="Sounds">
         <label text="Sounds and RTTTL:"></label>
         <label text="Ring Tone Text Transfer Language (RTTTL) "></label>
         <label text="Library: "></label>
@@ -1400,11 +1399,11 @@ _
     <block type="text"> <field name="TEXT">LeisureSuit</field> </block>
     <block type="text"> <field name="TEXT">MissionImp</field> </block>
 
-  </category>
+  </category> -->
 
   </category>
 
-  <category name="Communication">
+  <!-- <category name="Communication">
       <label text="Communication"></label>
       <category name="UART">
       <label text="UART Serial Port"></label>
@@ -1488,10 +1487,10 @@ _
 </block>
 
       </category>
-  </category>
+  </category> -->
  
  
-  <category name="Files">
+  <!-- <category name="Files">
   <label text="Read and write files"></label>
 
   <block type="file_open"> 
@@ -1537,10 +1536,10 @@ _
             <field name="NUM">80</field>
           </shadow>
         </value>
-</block>
+</block> -->
 
 
-<block type="file_read"> 
+<!-- <block type="file_read"> 
 
   <value name="filename">
         <shadow type="text">
@@ -1624,13 +1623,13 @@ _
 <block type="uos_ioctl">
 </block>
 
-  </category>
+  </category> -->
  
 
  
 
 
-  <category name="Network">
+   <!-- <category name="Network">
     <block type="wifi_client_connect">
       <field name="NAME">Connect to Wifi network</field>
       <value name="wifi_client_essid">
@@ -1936,10 +1935,10 @@ _
       <block type="webrepl_setup"></block>
       <block type="webrepl_start"></block>
     </category>
-  </category>
+  </category> -->
 
-<category name="Control">
-  <category name="PID">
+ <!-- <category name="Control"> -->
+  <!-- <category name="PID">
     <button text="Install control library" callbackKey="installPyLib"></button>
     <label text="Proportional–integral–derivative Controller"></label>
       <label text="Library: https://github.com/JorgeGMarques/micropython-simple-pid"></label>
@@ -1982,12 +1981,12 @@ _
     <block type="control_pid.auto_mode"></block>
     <block type="control_pid.output_limits"></block>
     <block type="control_pid.vars"></block>
-    <!--
+    
     <block type="control-pid-reset"></block>
-    -->
-  </category>
+    
+  </category>  -->
 
-  <category name="Simulate">
+  <!-- <category name="Simulate">
     <button text="Install control library" callbackKey="installPyLib"></button>
     <label text="No breadboard or sensors? Just simulate it!"></label>
     <label text="Realtime simulation:"></label>
@@ -2000,10 +1999,10 @@ _
     </block>
     <block type="simulate_dcmotor.vars">
     </block>
-  </category>
-</category>
+  </category>-->
+<!-- </category>  -->
 
-<category name="micropython">
+<!-- <category name="micropython">
 <category name="btree">
 <block type="btree_open">
 </block>
@@ -3070,5 +3069,5 @@ _
 <block type="wipy_heartbeat">
 </block>
 </category>
-</category>
+</category> -->
 </document>
