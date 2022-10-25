@@ -338,7 +338,7 @@
   </category> -->
 
 
-  <!-- <category name="Timing">
+   <category name="Timing"> 
     <label text="Timing"></label>
     <block type="utime.delay">
        <value name="TIME">
@@ -383,7 +383,7 @@
         </shadow>
       </value>
     </block>
-  </category> -->
+  </category> 
 
   <category name="Machine">
       <!-- <label text="Machine"></label>

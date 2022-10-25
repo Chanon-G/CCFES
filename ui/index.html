@@ -147,14 +147,14 @@ document.body.appendChild(el);
       </div>
       <div class="icon" id="deviceSelect">
         <select id="device_selector">
-          <!-- <option value="ESP8266">ESP8266</option> -->
+          <option value="ESP8266">ESP8266</option>
           <option value="ESP32">ESP32</option>
           
         </select>
         <button id="runButton" class="notext primary icon" title="..."></button>
       </div>
       <!-- ui ส่วน upload / เลือกพอร์ต -->
-      <!-- <button id="linkButton" class="notext icon" title="..."></button> -->
+      <button id="linkButton" class="notext icon" title="..."></button> 
 
       <button id="saveButton" class="notext icon" title="..."></button>
 
@@ -172,7 +172,7 @@ document.body.appendChild(el);
   </div>
   <!-- ui เลือก BT/Serial/Net -->
   <div class='channel-panel'>
-     <!-- <button class='icon' id="bluetoothButton">Bluetooth</button> -->
+      <!-- <button class='icon' id="bluetoothButton">Bluetooth</button>  -->
     <div> 
       <button class='icon' id="serialButton">Serial</button>
       <label for="resetBoard" class="checkswitch">
@@ -181,7 +181,7 @@ document.body.appendChild(el);
         <span></span>
       </label>
     </div>
-    <!-- <div>
+     <!-- <div> 
       <button class='icon' id="networkButton">Network</button>
       <span>
         Address: <input type="text" name="webrepl_url" id="url" value="ws://192.168.0.35:8266/" />
@@ -190,7 +190,7 @@ document.body.appendChild(el);
       <button class="icon" value="Scan boards" id="scanButton"
         onclick="window.open('ports.html','popup','width=600,height=600'); return false;" target="popup">Scan
         devices</button>
-    </div> -->
+    </div>  -->
   </div>
   <!-- ui เลือก BT/Serial/Net -->
   <!-- ui หน้า console -->
@@ -382,9 +382,9 @@ document.body.appendChild(el);
     /* global WebSocket, WebSerial and Bluetooth variable and functions (see core/channel.js) */
     // ตัวแปรและฟังก์ชันของ WebSocket, WebSerial และ Bluetooth (see core/channel.js)
     var Channel = {};
-   // Channel['websocket'] = new websocket();
+    Channel['websocket'] = new websocket();
     Channel['webserial'] = new webserial();
-   // Channel['webbluetooth'] = new webbluetooth();
+    Channel['webbluetooth'] = new webbluetooth();
     Channel['mux'] = new mux();
 
     //global terminal variable  ตัวแปรเทอร์มินัล

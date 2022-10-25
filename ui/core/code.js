@@ -429,17 +429,17 @@ Code.init = function() {
 
 
   // Disable the link button if page isn't backed by App Engine storage.
-  // var linkButton = document.getElementById('linkButton');
-  // if ('BlocklyStorage' in window) {
-  //   BlocklyStorage['HTTPREQUEST_ERROR'] = MSG['httpRequestError'];
-  //   BlocklyStorage['LINK_ALERT'] = MSG['linkAlert'];
-  //   BlocklyStorage['HASH_ERROR'] = MSG['hashError'];
-  //   BlocklyStorage['XML_ERROR'] = MSG['xmlError'];
-  //   Code.bindClick(linkButton,
-  //       function () {BlocklyStorage.link(Code.workspace);});
-  // } else if (linkButton) {
-  //   linkButton.className = 'disabled';
-  // }
+   var linkButton = document.getElementById('linkButton');
+   if ('BlocklyStorage' in window) {
+     BlocklyStorage['HTTPREQUEST_ERROR'] = MSG['httpRequestError'];
+     BlocklyStorage['LINK_ALERT'] = MSG['linkAlert'];
+     BlocklyStorage['HASH_ERROR'] = MSG['hashError'];
+     BlocklyStorage['XML_ERROR'] = MSG['xmlError'];
+     Code.bindClick(linkButton,
+         function () {BlocklyStorage.link(Code.workspace);});
+   } else if (linkButton) {
+     linkButton.className = 'disabled';
+   }
 
   for (var i = 0; i < Code.TABS_.length; i++) {
     var name = Code.TABS_[i];
@@ -645,7 +645,7 @@ Code.initLanguage = function() {
   //Changed to a fixed title for all languages - BIPES Beta
   document.getElementById('tab_blocks').textContent = MSG['blocks'];
 
-  // document.getElementById('linkButton').title = MSG['linkTooltip'];
+   document.getElementById('linkButton').title = MSG['linkTooltip'];
   document.getElementById('runButton').title = MSG['runTooltip'];
   document.getElementById('trashButton').title = MSG['trashTooltip'];
   document.getElementById('saveButton').title = MSG['saveTooltip'];
