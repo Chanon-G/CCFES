@@ -5,7 +5,7 @@
     "short_name": "BIPES",
     "scope": "/beta2/ui/",
     "display": "standalone",
-      "start_url": "https://bipes.net.br/beta2/ui/",
+    "start_url": "https://bipes.net.br/beta2/ui/",
     "background_color": "#fff",
     "theme_color": "#fff",
     "description": "Block based Integrated Platform for Embedded Systems",

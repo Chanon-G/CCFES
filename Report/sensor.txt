@@ -1,0 +1,15 @@
+ขาด 
+NTC		ดีน
+LED		กี	
+Lcd-I2C		หมัด
+18B20 Tampsensorดีน
+Buzzer		กี
+Keypad-I2C	หมัด
+
+มีแล้ว
+DHT11/22	เดิม		/ ทำแล้ว
+RELAY		เดิม
+SERVO		เดิม
+DC MOTER	เดิม
+RGB-LED		อ๊อฟ
+TACT SWITCH	อ๊อฟ

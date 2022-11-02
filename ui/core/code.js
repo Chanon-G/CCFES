@@ -430,14 +430,15 @@ Code.init = function() {
 
   // Disable the link button if page isn't backed by App Engine storage.
    var linkButton = document.getElementById('linkButton');
-   if ('BlocklyStorage' in window) {
-     BlocklyStorage['HTTPREQUEST_ERROR'] = MSG['httpRequestError'];
-     BlocklyStorage['LINK_ALERT'] = MSG['linkAlert'];
-     BlocklyStorage['HASH_ERROR'] = MSG['hashError'];
-     BlocklyStorage['XML_ERROR'] = MSG['xmlError'];
-     Code.bindClick(linkButton,
-         function () {BlocklyStorage.link(Code.workspace);});
-   } else if (linkButton) {
+  //  if ('BlocklyStorage' in window) {
+  //    BlocklyStorage['HTTPREQUEST_ERROR'] = MSG['httpRequestError'];
+  //    BlocklyStorage['LINK_ALERT'] = MSG['linkAlert'];
+  //    BlocklyStorage['HASH_ERROR'] = MSG['hashError'];
+  //    BlocklyStorage['XML_ERROR'] = MSG['xmlError'];
+  //     Code.bindClick(linkButton,
+  //        function () {BlocklyStorage.link(Code.workspace);});
+  //  } else 
+   if (linkButton) {
      linkButton.className = 'disabled';
    }
 

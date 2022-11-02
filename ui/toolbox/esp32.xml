@@ -1327,6 +1327,16 @@
 				</field>
 			</block>
 		</category>
+		<category name="LED RGB">
+			<block type="led_rgb_config">
+			</block>
+		</category>
+		<category name="TACT SWITCH">
+			<block type="tact_sw_init">
+			</block>
+			<block type="tact_sw_val">
+			</block>
+		</category>
 		<!-- Adicionando os blocos do Anenmômetro -->
 		<!-- <category name="Anemômetro"> -->
 			<!-- <label text="Anenômetro">

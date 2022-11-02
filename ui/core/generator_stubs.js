@@ -5890,3 +5890,80 @@ Blockly.Python['inter_init'] = function(block){
 	return code;
 };
 
+// * Function แปลง Hex to RGB Colour
+String.prototype.convertToRGB = function () {
+  if (this.length != 6) {
+    throw "Only six-digit hex colors are allowed.";
+  }
+
+  var aRgbHex = this.match(/.{1,2}/g);
+
+  var aRgb = [
+    parseInt(aRgbHex[0], 16),
+    parseInt(aRgbHex[1], 16),
+    parseInt(aRgbHex[2], 16)
+  ];
+  return aRgb;
+}
+
+Blockly.Python.led_rgb_config = function (block) {
+  const r_pin = block.getFieldValue('R_PIN');
+  const g_pin = block.getFieldValue('G_PIN');
+  const b_pin = block.getFieldValue('B_PIN');
+  const colour = block.getFieldValue('colour');
+
+  // aRgb = colour.convertToRGB()
+
+  //Hex to RGB
+  let hex = colour.substring(1, 7);
+  aRgb = hex.convertToRGB();
+
+  let red = `R_PIN_${r_pin}`;
+  let green = `G_PIN_${g_pin}`;
+  let blue = `B_PIN_${b_pin}`;
+  // define
+  //#define R_PIN 0
+  Blockly.Python.definitions_['import_machine'] = 'import machine';
+  Blockly.Python.definitions_[`define_led_rgb_${r_pin}_${g_pin}_${b_pin}`] =
+    `${red} = Pin(${r_pin},Pin.OUT)\n` +
+    `${green} = Pin(${g_pin},Pin.OUT)\n` +
+    `${blue} = Pin(${b_pin},Pin.OUT)\n`;
+
+  // void loop()
+  let code = `${red}.value(${aRgb[0]})
+${green}.value(${aRgb[1]})
+${blue}.value(${aRgb[2]})
+  `;
+
+
+
+  return code;
+};
+
+
+Blockly.Python.tact_sw_init = function (block) {
+  const pin = block.getFieldValue('pin');
+  // TODO: Assemble JavaScript into code variable.
+  //define
+  const tsw_pin = `TSW_${pin}`;
+  const tsw_state = `TSW_${pin}_state`;
+
+  Blockly.Python.definitions_['import_machine'] = 'import machine';
+  Blockly.Python.definitions_['define_sw_' + pin] = `${tsw_pin} = Pin(${pin},Pin.IN)\n`;
+  //setup
+
+  let code = `${tsw_state} = ${tsw_pin}.value()\n`;
+  return code;
+};
+
+
+//val
+Blockly.Python.tact_sw_val = function (block) {
+  var pin = block.getFieldValue('pin');
+
+  const tsw_state = `TSW_${pin}_state`;
+
+  var code = `${tsw_state}`;
+
+  return [code, Blockly.Python.ORDER_NONE];
+};

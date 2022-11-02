@@ -20,12 +20,8 @@
   <script src="core/manup.js"></script>
   <!-- End of Progressive Web Application setup -->
 
-
-
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-162001686-1"></script>
-
-
 
   <script>
     function setCookie(cname, cvalue, cpassword_value, exdays) {
@@ -147,7 +143,7 @@ document.body.appendChild(el);
       </div>
       <div class="icon" id="deviceSelect">
         <select id="device_selector">
-          <option value="ESP8266">ESP8266</option>
+          <!-- <option value="ESP8266">ESP8266</option> -->
           <option value="ESP32">ESP32</option>
           
         </select>
@@ -172,7 +168,7 @@ document.body.appendChild(el);
   </div>
   <!-- ui เลือก BT/Serial/Net -->
   <div class='channel-panel'>
-      <!-- <button class='icon' id="bluetoothButton">Bluetooth</button>  -->
+      <button class='icon' id="bluetoothButton">Bluetooth</button> 
     <div> 
       <button class='icon' id="serialButton">Serial</button>
       <label for="resetBoard" class="checkswitch">
@@ -181,7 +177,7 @@ document.body.appendChild(el);
         <span></span>
       </label>
     </div>
-     <!-- <div> 
+      <div> 
       <button class='icon' id="networkButton">Network</button>
       <span>
         Address: <input type="text" name="webrepl_url" id="url" value="ws://192.168.0.35:8266/" />
@@ -190,7 +186,7 @@ document.body.appendChild(el);
       <button class="icon" value="Scan boards" id="scanButton"
         onclick="window.open('ports.html','popup','width=600,height=600'); return false;" target="popup">Scan
         devices</button>
-    </div>  -->
+    </div> 
   </div>
   <!-- ui เลือก BT/Serial/Net -->
   <!-- ui หน้า console -->
