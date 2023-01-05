@@ -1337,6 +1337,61 @@
 			<block type="tact_sw_val">
 			</block>
 		</category>
+		<category name="KeypadI2c">
+			<block type="keypad">
+			</block>
+			<block type="KEYPAD_VALUE">
+			</block>
+		</category>
+		<category name="LCD_I2C" >
+			<block type="LCD_TEST">
+			</block>
+			<block type="SET_CURSOR">
+			</block>
+			<block type="LCD_CLEAR">
+			</block>
+			<block type="LCD_PRINT_TEXT">
+			</block>
+		</category>
+		<!-- NTC -->
+		<category name="NTC">
+			<block type="ntc_config">
+			</block>
+			<block type="ntc_showTemp">
+			</block>
+			<block type="ntc_value">
+			</block>
+		</category>
+		<!-- 18B20 tempesensor -->
+		<category name="18B20 Tsempesensor">
+			<block type="TEMP_SENSOR">
+			</block>
+			<block type="ROMS_TEMP_SENSOR">
+			</block>
+			<block type="ds_sensor_read_temp">
+			</block>
+			<block type="ROM_LOOP">
+			</block>
+			<block type="convert_temp">
+			</block>
+			<block type="value_temp_senssor_C">
+			</block>
+			<block type="value_temp_senssor_F">
+			</block>
+			<block type="value_temp_senssor_K">
+			</block>
+		</category>
+		<category name="LED">
+			<block type="led">
+			</block>
+			<block type="led_blink">
+			</block>
+		</category>
+		<category name="Buzzer">
+			<block type="buzzer">
+			</block>
+		</category>
+
 		<!-- Adicionando os blocos do Anenmômetro -->
 		<!-- <category name="Anemômetro"> -->
 			<!-- <label text="Anenômetro">

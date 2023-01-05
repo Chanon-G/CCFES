@@ -349,10 +349,12 @@ input.checkswitch[type="checkbox"] {
   background: #000000;
   color: rgb(255, 255, 255);
   border-color: #000000;
+  border-radius: 20px;
   font-family: 'Noto Sans Thai', sans-serif;
 }
 .tabs > div.taboff {
   cursor: pointer;
+  border-radius: 20px;
 }
 .tabs > div.taboff:hover {
   border-color: #000000;
@@ -847,7 +849,7 @@ button.icon.medium:before  {
   appearance: none;
   background-color: transparent;
   border: none;
-  padding: 0;
+  padding: 4px;
   margin: 0;
   font-family: 'Noto Sans Thai', sans-serif;
   font-size: inherit;

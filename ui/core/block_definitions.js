@@ -11581,3 +11581,907 @@ Blockly.Blocks['tact_sw_val'] = {
     this.setHelpUrl("");
   }
 };
+// -------------------เริ่มของหมัด---------------------------------------
+Blockly.Blocks['keypad'] = {
+  init: function() {
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_CENTRE)
+        .appendField("KEYPAD I2C");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("/media/keypad.png", 150, 150, { alt: "*", flipRtl: "FALSE" }));
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Address I2C");
+    this.appendValueInput("PinAddress")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(new Blockly.FieldDropdown([
+            ["0x20","0x20"], ["0x21","0x21"], ["0x22","0x22"],
+            ["0x23","0x23"], ["0x24","0x24"], ["0x25","0x25"],
+            ["0x26","0x26"], ["0x27","0x27"]
+            
+          
+          ]), "valueAddress");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['KEYPAD_VALUE'] = {
+  init: function () {
+      this.appendDummyInput()
+          .appendField("value : ")
+          .appendField(new Blockly.FieldDropdown([
+            ["0x20","0x20"], ["0x21","0x21"], ["0x22","0x22"],
+            ["0x23","0x23"], ["0x24","0x24"], ["0x25","0x25"],
+            ["0x26","0x26"], ["0x27","0x27"]
+             
+          ]), "pin");
+      this.setOutput(true, null);
+      this.setColour(230);
+      this.setTooltip("");
+      this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['LCD_TEST'] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField("LCD I2C INIT");
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage("/media/LCD.PNG", 125, 80, { alt: "*", flipRtl: "FALSE" }));
+    this.appendDummyInput()
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("address")
+      .appendField(new Blockly.FieldDropdown([["0x27", "0x27"], ["0x3F", "0x3f"]]), "addr");
+    this.appendDummyInput()
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("size")
+      .appendField(new Blockly.FieldDropdown([["16x2", "2,16"], ["20x4", "4,20"]]), "size");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['SET_CURSOR'] = {
+  init: function () {
+    this.appendDummyInput("")
+      .appendField("LCD Set Cursor");
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage("/media/LCD.PNG", 125, 80, { alt: "*", flipRtl: "FALSE" }));
+    this.appendDummyInput("")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("Column : ")
+      .appendField(new Blockly.FieldDropdown([["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["10", "10"], ["11", "12"], ["13", "13"], ["14", "14"], ["15", "15"], ["16", "16"], ["17", "17"], ["18", "18"], ["19", "19"]]), "CurSorRow")
+    this.appendDummyInput("")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("Row : ")
+      .appendField(new Blockly.FieldDropdown([["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"]]), "CurSorCol");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['LCD_CLEAR'] = {
+  init: function () {
+    this.setColour("#646464");
+    this.setHelpUrl('');
+    this.appendDummyInput("")
+      .appendField("LCD CLEAR")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT91);
+  }
+};
+
+Blockly.Blocks['LCD_PRINT_TEXT'] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField("LCD Print")
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage("/media/LCD.PNG", 125, 80, { alt: "*", flipRtl: "FALSE" }));
+    this.appendValueInput("Text", 'String')
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("Text");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip('');
+  }
+};
+// -------------------จบของหมัด---------------------------------------
+// Deen
+// ------------NTC--------------------------------------------------
+
+//Block เอาไว้กำหนดขา แล้วค่าตัว R
+Blockly.Blocks['ntc_config'] = {
+  init: function () {
+      this.appendDummyInput()
+          .appendField("NTC SENSOR");
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldImage("/media/ntc.PNG", 100, 100, { alt: "*", flipRtl: "FALSE" }));
+      this.appendDummyInput()
+          .appendField("PIN=")
+          .appendField(new Blockly.FieldDropdown([
+              ["D2 / CS / ADC2_2 / GPIO2", "2"],
+              ["D4 / ADC2_0 / GPIO4", "4"],
+              ["D12 / ADC2_5 / GPIO12", "12"],
+              ["D13 / ADC2_6 / GPIO13", "13"],
+              ["D14 / ADC2_3 / GPIO14", "14"],
+              ["D15 / ADC2_3 / GPIO15", "15"],
+              ["D18 / SCK / GPIO18", "18"],
+              ["D19 / MISO / GPIO19", "19"],
+              ["D21 / SDA / GPIO21", "21"],
+              ["D22 / SCL / GPIO22", "22"],
+              ["D23 / MOSI / GPIO23", "23"],
+              ["D25 / DAC 1 / ADC2_8 / GPIO25", "25"],
+              ["D26 / DAC 2 / ADC2_9 / GPIO26", "26"],
+              ["D27 / ADC2_7 / GPIO27", "27"],
+              ["D32 / ADC1_4 / GPIO32", "32"],
+              ["D33 / ADC1_5 / GPIO33", "33"],
+              ["D34 / ADC1_6 / GPIO34", "34"],
+              ["D35 / ADC1_7 / GPIO35", "35"],
+              ["VP / ADC1_0 / GPIO36", "36"],
+              ["VN / ADC1_3 / GPIO39", "39"],
+              ["CS / GPIO05", "5"],
+              ["TXD0 / GPIO01", "1"],
+              ["RXD0 / GPIO03", "3"],
+              ["RXD 1 / GPIO09", "9"],
+              ["TXD 1 / GPIO10", "10"],
+              ["RTS 1 / GPIO11", "11"],
+              ["TXD2 / GPIO17", "17"],
+              ["RXD2 / GPIO16", "16"],
+              ["ADC2_1 / GPIO0", "0"],
+              ["CTS2 / SPI_D GPIO08", "8"],
+              ["RTS2 / SPI_Q / GPIO07", "7"],
+              ["CTS1 / SPI_CLK / GPIO06", "6"]
+          ]), "pin");
+      this.appendValueInput("R_NTC")
+          .setCheck("Number")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("Register NTC (Ω)=");
+      this.appendValueInput("R")
+          .setCheck("Number")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("Register(Ω)=");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(230);
+      this.setTooltip("");
+      this.setHelpUrl("");
+  }
+};
+
+
+//Block แสดงค่าองศงเซลเซียส
+Blockly.Blocks['ntc_showTemp'] = {
+  init: function () {
+      this.appendDummyInput()
+          .appendField("Show Temp On Monitor");
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldImage("/media/ntc.PNG", 100, 100, { alt: "*", flipRtl: "FALSE" }));
+      this.appendDummyInput()
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("Temp : ")
+          .appendField(new Blockly.FieldDropdown([["Celsius", "Cel"], ["Kelvin", "Kel"], ["Fahrenheit", "Fah"]]), "unit");
+      this.appendDummyInput()
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("Pin :")
+          .appendField(new Blockly.FieldDropdown([
+              ["D2 / CS / ADC2_2 / GPIO2", "2"],
+              ["D4 / ADC2_0 / GPIO4", "4"],
+              ["D12 / ADC2_5 / GPIO12", "12"],
+              ["D13 / ADC2_6 / GPIO13", "13"],
+              ["D14 / ADC2_3 / GPIO14", "14"],
+              ["D15 / ADC2_3 / GPIO15", "15"],
+              ["D18 / SCK / GPIO18", "18"],
+              ["D19 / MISO / GPIO19", "19"],
+              ["D21 / SDA / GPIO21", "21"],
+              ["D22 / SCL / GPIO22", "22"],
+              ["D23 / MOSI / GPIO23", "23"],
+              ["D25 / DAC 1 / ADC2_8 / GPIO25", "25"],
+              ["D26 / DAC 2 / ADC2_9 / GPIO26", "26"],
+              ["D27 / ADC2_7 / GPIO27", "27"],
+              ["D32 / ADC1_4 / GPIO32", "32"],
+              ["D33 / ADC1_5 / GPIO33", "33"],
+              ["D34 / ADC1_6 / GPIO34", "34"],
+              ["D35 / ADC1_7 / GPIO35", "35"],
+              ["VP / ADC1_0 / GPIO36", "36"],
+              ["VN / ADC1_3 / GPIO39", "39"],
+              ["CS / GPIO05", "5"],
+              ["TXD0 / GPIO01", "1"],
+              ["RXD0 / GPIO03", "3"],
+              ["RXD 1 / GPIO09", "9"],
+              ["TXD 1 / GPIO10", "10"],
+              ["RTS 1 / GPIO11", "11"],
+              ["TXD2 / GPIO17", "17"],
+              ["RXD2 / GPIO16", "16"],
+              ["ADC2_1 / GPIO0", "0"],
+              ["CTS2 / SPI_D GPIO08", "8"],
+              ["RTS2 / SPI_Q / GPIO07", "7"],
+              ["CTS1 / SPI_CLK / GPIO06", "6"]
+          ]), "pin");
+      this.appendValueInput("text")
+          .setCheck("String")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("Text to Serial Minitor =");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(230);
+      this.setTooltip("");
+      this.setHelpUrl("");
+  }
+};
+
+
+Blockly.Blocks['ntc_value'] = {
+  init: function () {
+      this.appendDummyInput()
+          .appendField("Temp : ")
+          .appendField(new Blockly.FieldDropdown([["Celsius", "Cel"], ["Kelvin", "Kel"], ["Fahrenheit", "Fah"]]), "unit");
+      this.appendDummyInput()
+          .appendField("Pin : ")
+          .appendField(new Blockly.FieldDropdown([
+              ["D2 / CS / ADC2_2 / GPIO2", "2"],
+              ["D4 / ADC2_0 / GPIO4", "4"],
+              ["D12 / ADC2_5 / GPIO12", "12"],
+              ["D13 / ADC2_6 / GPIO13", "13"],
+              ["D14 / ADC2_3 / GPIO14", "14"],
+              ["D15 / ADC2_3 / GPIO15", "15"],
+              ["D18 / SCK / GPIO18", "18"],
+              ["D19 / MISO / GPIO19", "19"],
+              ["D21 / SDA / GPIO21", "21"],
+              ["D22 / SCL / GPIO22", "22"],
+              ["D23 / MOSI / GPIO23", "23"],
+              ["D25 / DAC 1 / ADC2_8 / GPIO25", "25"],
+              ["D26 / DAC 2 / ADC2_9 / GPIO26", "26"],
+              ["D27 / ADC2_7 / GPIO27", "27"],
+              ["D32 / ADC1_4 / GPIO32", "32"],
+              ["D33 / ADC1_5 / GPIO33", "33"],
+              ["D34 / ADC1_6 / GPIO34", "34"],
+              ["D35 / ADC1_7 / GPIO35", "35"],
+              ["VP / ADC1_0 / GPIO36", "36"],
+              ["VN / ADC1_3 / GPIO39", "39"],
+              ["CS / GPIO05", "5"],
+              ["TXD0 / GPIO01", "1"],
+              ["RXD0 / GPIO03", "3"],
+              ["RXD 1 / GPIO09", "9"],
+              ["TXD 1 / GPIO10", "10"],
+              ["RTS 1 / GPIO11", "11"],
+              ["TXD2 / GPIO17", "17"],
+              ["RXD2 / GPIO16", "16"],
+              ["ADC2_1 / GPIO0", "0"],
+              ["CTS2 / SPI_D GPIO08", "8"],
+              ["RTS2 / SPI_Q / GPIO07", "7"],
+              ["CTS1 / SPI_CLK / GPIO06", "6"]
+          ]), "pin");
+      this.setOutput(true, null);
+      this.setColour(230);
+      this.setTooltip("");
+      this.setHelpUrl("");
+  }
+};
+// ------------DS18B20 Tempesensor-------------
+Blockly.Blocks['TEMP_SENSOR'] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField("DS18B20 INIT");
+    this.appendDummyInput()
+      .appendField(new Blockly.FieldImage("/media/ds18b20.PNG", 75, 150, { alt: "*", flipRtl: "FALSE" }));
+    this.appendDummyInput()
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("PIN :")
+      .appendField(new Blockly.FieldDropdown([
+        ["D2 / CS / ADC2_2 / GPIO2", "2"],
+        ["D4 / ADC2_0 / GPIO4", "4"],
+        ["D12 / ADC2_5 / GPIO12", "12"],
+        ["D13 / ADC2_6 / GPIO13", "13"],
+        ["D14 / ADC2_3 / GPIO14", "14"],
+        ["D15 / ADC2_3 / GPIO15", "15"],
+        ["D18 / SCK / GPIO18", "18"],
+        ["D19 / MISO / GPIO19", "19"],
+        ["D21 / SDA / GPIO21", "21"],
+        ["D22 / SCL / GPIO22", "22"],
+        ["D23 / MOSI / GPIO23", "23"],
+        ["D25 / DAC 1 / ADC2_8 / GPIO25", "25"],
+        ["D26 / DAC 2 / ADC2_9 / GPIO26", "26"],
+        ["D27 / ADC2_7 / GPIO27", "27"],
+        ["D32 / ADC1_4 / GPIO32", "32"],
+        ["D33 / ADC1_5 / GPIO33", "33"],
+        ["D34 / ADC1_6 / GPIO34", "34"],
+        ["D35 / ADC1_7 / GPIO35", "35"],
+        ["VP / ADC1_0 / GPIO36", "36"],
+        ["VN / ADC1_3 / GPIO39", "39"],
+        ["CS / GPIO05", "5"],
+        ["TXD0 / GPIO01", "1"],
+        ["RXD0 / GPIO03", "3"],
+        ["RXD 1 / GPIO09", "9"],
+        ["TXD 1 / GPIO10", "10"],
+        ["RTS 1 / GPIO11", "11"],
+        ["TXD2 / GPIO17", "17"],
+        ["RXD2 / GPIO16", "16"],
+        ["ADC2_1 / GPIO0", "0"],
+        ["CTS2 / SPI_D GPIO08", "8"],
+        ["RTS2 / SPI_Q / GPIO07", "7"],
+        ["CTS1 / SPI_CLK / GPIO06", "6"]
+      ]), "pin");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['value_temp_senssor_C'] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField("DS18B20 Get Value °C");
+    this.appendDummyInput()
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("PIN :")
+      .appendField(new Blockly.FieldDropdown([
+        ["D2 / CS / ADC2_2 / GPIO2", "2"],
+        ["D4 / ADC2_0 / GPIO4", "4"],
+        ["D12 / ADC2_5 / GPIO12", "12"],
+        ["D13 / ADC2_6 / GPIO13", "13"],
+        ["D14 / ADC2_3 / GPIO14", "14"],
+        ["D15 / ADC2_3 / GPIO15", "15"],
+        ["D18 / SCK / GPIO18", "18"],
+        ["D19 / MISO / GPIO19", "19"],
+        ["D21 / SDA / GPIO21", "21"],
+        ["D22 / SCL / GPIO22", "22"],
+        ["D23 / MOSI / GPIO23", "23"],
+        ["D25 / DAC 1 / ADC2_8 / GPIO25", "25"],
+        ["D26 / DAC 2 / ADC2_9 / GPIO26", "26"],
+        ["D27 / ADC2_7 / GPIO27", "27"],
+        ["D32 / ADC1_4 / GPIO32", "32"],
+        ["D33 / ADC1_5 / GPIO33", "33"],
+        ["D34 / ADC1_6 / GPIO34", "34"],
+        ["D35 / ADC1_7 / GPIO35", "35"],
+        ["VP / ADC1_0 / GPIO36", "36"],
+        ["VN / ADC1_3 / GPIO39", "39"],
+        ["CS / GPIO05", "5"],
+        ["TXD0 / GPIO01", "1"],
+        ["RXD0 / GPIO03", "3"],
+        ["RXD 1 / GPIO09", "9"],
+        ["TXD 1 / GPIO10", "10"],
+        ["RTS 1 / GPIO11", "11"],
+        ["TXD2 / GPIO17", "17"],
+        ["RXD2 / GPIO16", "16"],
+        ["ADC2_1 / GPIO0", "0"],
+        ["CTS2 / SPI_D GPIO08", "8"],
+        ["RTS2 / SPI_Q / GPIO07", "7"],
+        ["CTS1 / SPI_CLK / GPIO06", "6"]
+      ]), "pin");
+    this.setOutput(true, null);
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+}; 
+Blockly.Blocks['value_temp_senssor_F'] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField("DS18B20 Get Value °F");
+    this.appendDummyInput()
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("PIN :")
+      .appendField(new Blockly.FieldDropdown([
+        ["D2 / CS / ADC2_2 / GPIO2", "2"],
+        ["D4 / ADC2_0 / GPIO4", "4"],
+        ["D12 / ADC2_5 / GPIO12", "12"],
+        ["D13 / ADC2_6 / GPIO13", "13"],
+        ["D14 / ADC2_3 / GPIO14", "14"],
+        ["D15 / ADC2_3 / GPIO15", "15"],
+        ["D18 / SCK / GPIO18", "18"],
+        ["D19 / MISO / GPIO19", "19"],
+        ["D21 / SDA / GPIO21", "21"],
+        ["D22 / SCL / GPIO22", "22"],
+        ["D23 / MOSI / GPIO23", "23"],
+        ["D25 / DAC 1 / ADC2_8 / GPIO25", "25"],
+        ["D26 / DAC 2 / ADC2_9 / GPIO26", "26"],
+        ["D27 / ADC2_7 / GPIO27", "27"],
+        ["D32 / ADC1_4 / GPIO32", "32"],
+        ["D33 / ADC1_5 / GPIO33", "33"],
+        ["D34 / ADC1_6 / GPIO34", "34"],
+        ["D35 / ADC1_7 / GPIO35", "35"],
+        ["VP / ADC1_0 / GPIO36", "36"],
+        ["VN / ADC1_3 / GPIO39", "39"],
+        ["CS / GPIO05", "5"],
+        ["TXD0 / GPIO01", "1"],
+        ["RXD0 / GPIO03", "3"],
+        ["RXD 1 / GPIO09", "9"],
+        ["TXD 1 / GPIO10", "10"],
+        ["RTS 1 / GPIO11", "11"],
+        ["TXD2 / GPIO17", "17"],
+        ["RXD2 / GPIO16", "16"],
+        ["ADC2_1 / GPIO0", "0"],
+        ["CTS2 / SPI_D GPIO08", "8"],
+        ["RTS2 / SPI_Q / GPIO07", "7"],
+        ["CTS1 / SPI_CLK / GPIO06", "6"]
+      ]), "pin");
+    this.setOutput(true, null);
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+}; 
+Blockly.Blocks['value_temp_senssor_K'] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField("DS18B20 Get Value °K");
+    this.appendDummyInput()
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("PIN :")
+      .appendField(new Blockly.FieldDropdown([
+        ["D2 / CS / ADC2_2 / GPIO2", "2"],
+        ["D4 / ADC2_0 / GPIO4", "4"],
+        ["D12 / ADC2_5 / GPIO12", "12"],
+        ["D13 / ADC2_6 / GPIO13", "13"],
+        ["D14 / ADC2_3 / GPIO14", "14"],
+        ["D15 / ADC2_3 / GPIO15", "15"],
+        ["D18 / SCK / GPIO18", "18"],
+        ["D19 / MISO / GPIO19", "19"],
+        ["D21 / SDA / GPIO21", "21"],
+        ["D22 / SCL / GPIO22", "22"],
+        ["D23 / MOSI / GPIO23", "23"],
+        ["D25 / DAC 1 / ADC2_8 / GPIO25", "25"],
+        ["D26 / DAC 2 / ADC2_9 / GPIO26", "26"],
+        ["D27 / ADC2_7 / GPIO27", "27"],
+        ["D32 / ADC1_4 / GPIO32", "32"],
+        ["D33 / ADC1_5 / GPIO33", "33"],
+        ["D34 / ADC1_6 / GPIO34", "34"],
+        ["D35 / ADC1_7 / GPIO35", "35"],
+        ["VP / ADC1_0 / GPIO36", "36"],
+        ["VN / ADC1_3 / GPIO39", "39"],
+        ["CS / GPIO05", "5"],
+        ["TXD0 / GPIO01", "1"],
+        ["RXD0 / GPIO03", "3"],
+        ["RXD 1 / GPIO09", "9"],
+        ["TXD 1 / GPIO10", "10"],
+        ["RTS 1 / GPIO11", "11"],
+        ["TXD2 / GPIO17", "17"],
+        ["RXD2 / GPIO16", "16"],
+        ["ADC2_1 / GPIO0", "0"],
+        ["CTS2 / SPI_D GPIO08", "8"],
+        ["RTS2 / SPI_Q / GPIO07", "7"],
+        ["CTS1 / SPI_CLK / GPIO06", "6"]
+      ]), "pin");
+    this.setOutput(true, null);
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+}; 
+
+Blockly.Blocks['ROMS_TEMP_SENSOR'] = {
+  init: function () {
+    this.appendDummyInput()
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("ROMS ")
+      .appendField(new Blockly.FieldDropdown([
+        ["D2 / CS / ADC2_2 / GPIO2", "2"],
+        ["D4 / ADC2_0 / GPIO4", "4"],
+        ["D12 / ADC2_5 / GPIO12", "12"],
+        ["D13 / ADC2_6 / GPIO13", "13"],
+        ["D14 / ADC2_3 / GPIO14", "14"],
+        ["D15 / ADC2_3 / GPIO15", "15"],
+        ["D18 / SCK / GPIO18", "18"],
+        ["D19 / MISO / GPIO19", "19"],
+        ["D21 / SDA / GPIO21", "21"],
+        ["D22 / SCL / GPIO22", "22"],
+        ["D23 / MOSI / GPIO23", "23"],
+        ["D25 / DAC 1 / ADC2_8 / GPIO25", "25"],
+        ["D26 / DAC 2 / ADC2_9 / GPIO26", "26"],
+        ["D27 / ADC2_7 / GPIO27", "27"],
+        ["D32 / ADC1_4 / GPIO32", "32"],
+        ["D33 / ADC1_5 / GPIO33", "33"],
+        ["D34 / ADC1_6 / GPIO34", "34"],
+        ["D35 / ADC1_7 / GPIO35", "35"],
+        ["VP / ADC1_0 / GPIO36", "36"],
+        ["VN / ADC1_3 / GPIO39", "39"],
+        ["CS / GPIO05", "5"],
+        ["TXD0 / GPIO01", "1"],
+        ["RXD0 / GPIO03", "3"],
+        ["RXD 1 / GPIO09", "9"],
+        ["TXD 1 / GPIO10", "10"],
+        ["RTS 1 / GPIO11", "11"],
+        ["TXD2 / GPIO17", "17"],
+        ["RXD2 / GPIO16", "16"],
+        ["ADC2_1 / GPIO0", "0"],
+        ["CTS2 / SPI_D GPIO08", "8"],
+        ["RTS2 / SPI_Q / GPIO07", "7"],
+        ["CTS1 / SPI_CLK / GPIO06", "6"]
+      ]), "pin");
+    this.setOutput(true, null);
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['ds_sensor_read_temp'] = {
+  init: function () {
+    this.appendDummyInput()
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("Read Temp  °C")
+      .appendField(new Blockly.FieldDropdown([
+        ["D2 / CS / ADC2_2 / GPIO2", "2"],
+        ["D4 / ADC2_0 / GPIO4", "4"],
+        ["D12 / ADC2_5 / GPIO12", "12"],
+        ["D13 / ADC2_6 / GPIO13", "13"],
+        ["D14 / ADC2_3 / GPIO14", "14"],
+        ["D15 / ADC2_3 / GPIO15", "15"],
+        ["D18 / SCK / GPIO18", "18"],
+        ["D19 / MISO / GPIO19", "19"],
+        ["D21 / SDA / GPIO21", "21"],
+        ["D22 / SCL / GPIO22", "22"],
+        ["D23 / MOSI / GPIO23", "23"],
+        ["D25 / DAC 1 / ADC2_8 / GPIO25", "25"],
+        ["D26 / DAC 2 / ADC2_9 / GPIO26", "26"],
+        ["D27 / ADC2_7 / GPIO27", "27"],
+        ["D32 / ADC1_4 / GPIO32", "32"],
+        ["D33 / ADC1_5 / GPIO33", "33"],
+        ["D34 / ADC1_6 / GPIO34", "34"],
+        ["D35 / ADC1_7 / GPIO35", "35"],
+        ["VP / ADC1_0 / GPIO36", "36"],
+        ["VN / ADC1_3 / GPIO39", "39"],
+        ["CS / GPIO05", "5"],
+        ["TXD0 / GPIO01", "1"],
+        ["RXD0 / GPIO03", "3"],
+        ["RXD 1 / GPIO09", "9"],
+        ["TXD 1 / GPIO10", "10"],
+        ["RTS 1 / GPIO11", "11"],
+        ["TXD2 / GPIO17", "17"],
+        ["RXD2 / GPIO16", "16"],
+        ["ADC2_1 / GPIO0", "0"],
+        ["CTS2 / SPI_D GPIO08", "8"],
+        ["RTS2 / SPI_Q / GPIO07", "7"],
+        ["CTS1 / SPI_CLK / GPIO06", "6"]
+      ]), "pin");
+    this.appendValueInput("var")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField(new Blockly.FieldLabelSerializable("Variable"), "VAR");
+    this.setOutput(true, null);
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['ds_sensor_read_temp_F'] = {
+  init: function () {
+    this.appendDummyInput()
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("Read Temp  °F")
+      .appendField(new Blockly.FieldDropdown([
+        ["D2 / CS / ADC2_2 / GPIO2", "2"],
+        ["D4 / ADC2_0 / GPIO4", "4"],
+        ["D12 / ADC2_5 / GPIO12", "12"],
+        ["D13 / ADC2_6 / GPIO13", "13"],
+        ["D14 / ADC2_3 / GPIO14", "14"],
+        ["D15 / ADC2_3 / GPIO15", "15"],
+        ["D18 / SCK / GPIO18", "18"],
+        ["D19 / MISO / GPIO19", "19"],
+        ["D21 / SDA / GPIO21", "21"],
+        ["D22 / SCL / GPIO22", "22"],
+        ["D23 / MOSI / GPIO23", "23"],
+        ["D25 / DAC 1 / ADC2_8 / GPIO25", "25"],
+        ["D26 / DAC 2 / ADC2_9 / GPIO26", "26"],
+        ["D27 / ADC2_7 / GPIO27", "27"],
+        ["D32 / ADC1_4 / GPIO32", "32"],
+        ["D33 / ADC1_5 / GPIO33", "33"],
+        ["D34 / ADC1_6 / GPIO34", "34"],
+        ["D35 / ADC1_7 / GPIO35", "35"],
+        ["VP / ADC1_0 / GPIO36", "36"],
+        ["VN / ADC1_3 / GPIO39", "39"],
+        ["CS / GPIO05", "5"],
+        ["TXD0 / GPIO01", "1"],
+        ["RXD0 / GPIO03", "3"],
+        ["RXD 1 / GPIO09", "9"],
+        ["TXD 1 / GPIO10", "10"],
+        ["RTS 1 / GPIO11", "11"],
+        ["TXD2 / GPIO17", "17"],
+        ["RXD2 / GPIO16", "16"],
+        ["ADC2_1 / GPIO0", "0"],
+        ["CTS2 / SPI_D GPIO08", "8"],
+        ["RTS2 / SPI_Q / GPIO07", "7"],
+        ["CTS1 / SPI_CLK / GPIO06", "6"]
+      ]), "pin");
+    this.appendValueInput("var")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField(new Blockly.FieldLabelSerializable("Variable of Loop"), "VAR");
+    this.setOutput(true, null);
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['ROM_LOOP'] = {
+  init: function () {
+    this.appendDummyInput()
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("ROM of LOOP ")
+      .appendField(new Blockly.FieldDropdown([
+        ["D2 / CS / ADC2_2 / GPIO2", "2"],
+        ["D4 / ADC2_0 / GPIO4", "4"],
+        ["D12 / ADC2_5 / GPIO12", "12"],
+        ["D13 / ADC2_6 / GPIO13", "13"],
+        ["D14 / ADC2_3 / GPIO14", "14"],
+        ["D15 / ADC2_3 / GPIO15", "15"],
+        ["D18 / SCK / GPIO18", "18"],
+        ["D19 / MISO / GPIO19", "19"],
+        ["D21 / SDA / GPIO21", "21"],
+        ["D22 / SCL / GPIO22", "22"],
+        ["D23 / MOSI / GPIO23", "23"],
+        ["D25 / DAC 1 / ADC2_8 / GPIO25", "25"],
+        ["D26 / DAC 2 / ADC2_9 / GPIO26", "26"],
+        ["D27 / ADC2_7 / GPIO27", "27"],
+        ["D32 / ADC1_4 / GPIO32", "32"],
+        ["D33 / ADC1_5 / GPIO33", "33"],
+        ["D34 / ADC1_6 / GPIO34", "34"],
+        ["D35 / ADC1_7 / GPIO35", "35"],
+        ["VP / ADC1_0 / GPIO36", "36"],
+        ["VN / ADC1_3 / GPIO39", "39"],
+        ["CS / GPIO05", "5"],
+        ["TXD0 / GPIO01", "1"],
+        ["RXD0 / GPIO03", "3"],
+        ["RXD 1 / GPIO09", "9"],
+        ["TXD 1 / GPIO10", "10"],
+        ["RTS 1 / GPIO11", "11"],
+        ["TXD2 / GPIO17", "17"],
+        ["RXD2 / GPIO16", "16"],
+        ["ADC2_1 / GPIO0", "0"],
+        ["CTS2 / SPI_D GPIO08", "8"],
+        ["RTS2 / SPI_Q / GPIO07", "7"],
+        ["CTS1 / SPI_CLK / GPIO06", "6"]
+      ]), "pin");
+    this.setOutput(true, null);
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
+
+Blockly.Blocks['convert_temp'] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField("Convert Temp");
+    this.appendDummyInput()
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("ds_sensor ")
+      .appendField(new Blockly.FieldDropdown([
+        ["D2 / CS / ADC2_2 / GPIO2", "2"],
+        ["D4 / ADC2_0 / GPIO4", "4"],
+        ["D12 / ADC2_5 / GPIO12", "12"],
+        ["D13 / ADC2_6 / GPIO13", "13"],
+        ["D14 / ADC2_3 / GPIO14", "14"],
+        ["D15 / ADC2_3 / GPIO15", "15"],
+        ["D18 / SCK / GPIO18", "18"],
+        ["D19 / MISO / GPIO19", "19"],
+        ["D21 / SDA / GPIO21", "21"],
+        ["D22 / SCL / GPIO22", "22"],
+        ["D23 / MOSI / GPIO23", "23"],
+        ["D25 / DAC 1 / ADC2_8 / GPIO25", "25"],
+        ["D26 / DAC 2 / ADC2_9 / GPIO26", "26"],
+        ["D27 / ADC2_7 / GPIO27", "27"],
+        ["D32 / ADC1_4 / GPIO32", "32"],
+        ["D33 / ADC1_5 / GPIO33", "33"],
+        ["D34 / ADC1_6 / GPIO34", "34"],
+        ["D35 / ADC1_7 / GPIO35", "35"],
+        ["VP / ADC1_0 / GPIO36", "36"],
+        ["VN / ADC1_3 / GPIO39", "39"],
+        ["CS / GPIO05", "5"],
+        ["TXD0 / GPIO01", "1"],
+        ["RXD0 / GPIO03", "3"],
+        ["RXD 1 / GPIO09", "9"],
+        ["TXD 1 / GPIO10", "10"],
+        ["RTS 1 / GPIO11", "11"],
+        ["TXD2 / GPIO17", "17"],
+        ["RXD2 / GPIO16", "16"],
+        ["ADC2_1 / GPIO0", "0"],
+        ["CTS2 / SPI_D GPIO08", "8"],
+        ["RTS2 / SPI_Q / GPIO07", "7"],
+        ["CTS1 / SPI_CLK / GPIO06", "6"]
+      ]), "pin");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['led'] = {
+  init: function () {
+      this.appendDummyInput()
+          .appendField("LED ");
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldImage("/media/led.PNG", 150, 100, { alt: "*", flipRtl: "FALSE" }));
+      this.appendDummyInput()
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("pin =")
+          .appendField(new Blockly.FieldDropdown([
+              ["D2 / CS / ADC2_2 / GPIO2", "2"],
+              ["D4 / ADC2_0 / GPIO4", "4"],
+              ["D12 / ADC2_5 / GPIO12", "12"],
+              ["D13 / ADC2_6 / GPIO13", "13"],
+              ["D14 / ADC2_3 / GPIO14", "14"],
+              ["D15 / ADC2_3 / GPIO15", "15"],
+              ["D18 / SCK / GPIO18", "18"],
+              ["D19 / MISO / GPIO19", "19"],
+              ["D21 / SDA / GPIO21", "21"],
+              ["D22 / SCL / GPIO22", "22"],
+              ["D23 / MOSI / GPIO23", "23"],
+              ["D25 / DAC 1 / ADC2_8 / GPIO25", "25"],
+              ["D26 / DAC 2 / ADC2_9 / GPIO26", "26"],
+              ["D27 / ADC2_7 / GPIO27", "27"],
+              ["D32 / ADC1_4 / GPIO32", "32"],
+              ["D33 / ADC1_5 / GPIO33", "33"],
+              ["D34 / ADC1_6 / GPIO34", "34"],
+              ["D35 / ADC1_7 / GPIO35", "35"],
+              ["VP / ADC1_0 / GPIO36", "36"],
+              ["VN / ADC1_3 / GPIO39", "39"],
+              ["CS / GPIO05", "5"],
+              ["TXD0 / GPIO01", "1"],
+              ["RXD0 / GPIO03", "3"],
+              ["RXD 1 / GPIO09", "9"],
+              ["TXD 1 / GPIO10", "10"],
+              ["RTS 1 / GPIO11", "11"],
+              ["TXD2 / GPIO17", "17"],
+              ["RXD2 / GPIO16", "16"],
+              ["ADC2_1 / GPIO0", "0"],
+              ["CTS2 / SPI_D GPIO08", "8"],
+              ["RTS2 / SPI_Q / GPIO07", "7"],
+              ["CTS1 / SPI_CLK / GPIO06", "6"]
+          ]), "pin");
+      this.appendDummyInput()
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("state =")
+          .appendField(new Blockly.FieldDropdown([
+              ["HIGH", "HIGH"],
+              ["LOW", "LOW"]
+          ]), "state");
+      this.setInputsInline(false);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(105);
+      this.setTooltip("");
+      this.setHelpUrl("");
+  }
+};
+Blockly.Blocks['led_blink'] = {
+  init: function () {
+      this.appendDummyInput()
+          .appendField("LED BLINK");
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldImage("/media/led.PNG", 100, 100, { alt: "*", flipRtl: "FALSE" }));
+      this.appendDummyInput()
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("pin =")
+          .appendField(new Blockly.FieldDropdown([
+              ["D2 / CS / ADC2_2 / GPIO2", "2"],
+              ["D4 / ADC2_0 / GPIO4", "4"],
+              ["D12 / ADC2_5 / GPIO12", "12"],
+              ["D13 / ADC2_6 / GPIO13", "13"],
+              ["D14 / ADC2_3 / GPIO14", "14"],
+              ["D15 / ADC2_3 / GPIO15", "15"],
+              ["D18 / SCK / GPIO18", "18"],
+              ["D19 / MISO / GPIO19", "19"],
+              ["D21 / SDA / GPIO21", "21"],
+              ["D22 / SCL / GPIO22", "22"],
+              ["D23 / MOSI / GPIO23", "23"],
+              ["D25 / DAC 1 / ADC2_8 / GPIO25", "25"],
+              ["D26 / DAC 2 / ADC2_9 / GPIO26", "26"],
+              ["D27 / ADC2_7 / GPIO27", "27"],
+              ["D32 / ADC1_4 / GPIO32", "32"],
+              ["D33 / ADC1_5 / GPIO33", "33"],
+              ["D34 / ADC1_6 / GPIO34", "34"],
+              ["D35 / ADC1_7 / GPIO35", "35"],
+              ["VP / ADC1_0 / GPIO36", "36"],
+              ["VN / ADC1_3 / GPIO39", "39"],
+              ["CS / GPIO05", "5"],
+              ["TXD0 / GPIO01", "1"],
+              ["RXD0 / GPIO03", "3"],
+              ["RXD 1 / GPIO09", "9"],
+              ["TXD 1 / GPIO10", "10"],
+              ["RTS 1 / GPIO11", "11"],
+              ["TXD2 / GPIO17", "17"],
+              ["RXD2 / GPIO16", "16"],
+              ["ADC2_1 / GPIO0", "0"],
+              ["CTS2 / SPI_D GPIO08", "8"],
+              ["RTS2 / SPI_Q / GPIO07", "7"],
+              ["CTS1 / SPI_CLK / GPIO06", "6"]
+          ]), "pin");
+      this.appendDummyInput()
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("Delay =")
+          .appendField(new Blockly.FieldDropdown([
+              ["0.5", "0.5"],
+              ["1", "1"],
+              ["1.5", "1.5"],
+              ["2", "2"],
+              ["2.5", "2.5"],
+              ["3", "3"],
+              ["3.5", "3.5"],
+              ["4", "4"],
+              ["4.5", "4.5"],
+              ["5", "5"]
+          ]), "delay");
+      this.setInputsInline(false);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(230);
+      this.setTooltip("");
+      this.setHelpUrl("");
+  }
+};
+Blockly.Blocks['buzzer'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("BUZZER")
+        .appendField(new Blockly.FieldImage("/media/buzzer.png", 100, 100, { alt: "*", flipRtl: "FALSE" }));
+    this.appendDummyInput()
+        .appendField("PINOUT")
+        .appendField(new Blockly.FieldDropdown([
+          ["D2 / CS / ADC2_2 / GPIO2", "2"],
+          ["D4 / ADC2_0 / GPIO4", "4"],
+          ["D12 / ADC2_5 / GPIO12", "12"],
+          ["D13 / ADC2_6 / GPIO13", "13"],
+          ["D14 / ADC2_3 / GPIO14", "14"],
+          ["D15 / ADC2_3 / GPIO15", "15"],
+          ["D18 / SCK / GPIO18", "18"],
+          ["D19 / MISO / GPIO19", "19"],
+          ["D21 / SDA / GPIO21", "21"],
+          ["D22 / SCL / GPIO22", "22"],
+          ["D23 / MOSI / GPIO23", "23"],
+          ["D25 / DAC 1 / ADC2_8 / GPIO25", "25"],
+          ["D26 / DAC 2 / ADC2_9 / GPIO26", "26"],
+          ["D27 / ADC2_7 / GPIO27", "27"],
+          ["D32 / ADC1_4 / GPIO32", "32"],
+          ["D33 / ADC1_5 / GPIO33", "33"],
+          ["D34 / ADC1_6 / GPIO34", "34"],
+          ["D35 / ADC1_7 / GPIO35", "35"],
+          ["VP / ADC1_0 / GPIO36", "36"],
+          ["VN / ADC1_3 / GPIO39", "39"],
+          ["CS / GPIO05", "5"],
+          ["TXD0 / GPIO01", "1"],
+          ["RXD0 / GPIO03", "3"],
+          ["RXD 1 / GPIO09", "9"],
+          ["TXD 1 / GPIO10", "10"],
+          ["RTS 1 / GPIO11", "11"],
+          ["TXD2 / GPIO17", "17"],
+          ["RXD2 / GPIO16", "16"],
+          ["ADC2_1 / GPIO0", "0"],
+          ["CTS2 / SPI_D GPIO08", "8"],
+          ["RTS2 / SPI_Q / GPIO07", "7"],
+          ["CTS1 / SPI_CLK / GPIO06", "6"]
+          ]), "PINOUT");
+          this.appendDummyInput()
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("state =")
+          .appendField(new Blockly.FieldDropdown([
+              ["HIGH", "HIGH"],
+              ["LOW", "LOW"]
+          ]), "state");
+      this.setInputsInline(false);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(0);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};

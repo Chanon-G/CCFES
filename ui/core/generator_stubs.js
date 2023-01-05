@@ -5967,3 +5967,216 @@ Blockly.Python.tact_sw_val = function (block) {
 
   return [code, Blockly.Python.ORDER_NONE];
 };
+// --------------------เริ่มของหมัด---------------------------
+
+Blockly.Python.keypad = function (block) {
+  const pin = block.getFieldValue('valueAddress');
+  // Blockly.Python.definitions_['smbus'] = 'import smbus';
+  Blockly.Python.definitions_['import_time'] = 'import time';
+  Blockly.Python.definitions_['import_smbus'] = 'import smbus';
+
+  let code = `  
+# Set the I2C bus_${pin} number and device address
+bus_${pin} = smbus.SMBus(1)
+device_address_${pin} = ${pin}
+  
+# Set the number of rows and columns on the keypad
+num_rows_${pin} = 4
+num_cols_${pin} = 4
+  
+# Set the keymap_${pin} for the keypad
+keymap_${pin} = [
+      ['1', '2', '3', 'A'],
+      ['4', '5', '6', 'B'],
+      ['7', '8', '9', 'C'],
+      ['*', '0', '#', 'D']
+]
+  
+# Create a function to read the state of the keypad
+def read_keypad():
+    # Read the state of the inputs from the PCF8574
+    input_state_${pin} = bus_${pin}.read_byte(device_address_${pin})
+    # Convert the input state to a binary string
+    input_state_bin_${pin} = bin(input_state_${pin})[2:].zfill(8)
+    # Check each input to see if it is high or low
+    for row_${pin} in range(num_rows_${pin}):
+        for col_${pin} in range(num_cols_${pin}):
+            if input_state_bin_${pin}[col_${pin} + (row_${pin} * num_cols_${pin})] == '1':
+              # If the input is high, return the corresponding key_${pin}
+                return keymap_${pin}[row_${pin}][col_${pin}]
+      # If no keys are pressed, return None
+            return None
+  
+  # Create a loop to continuously read the keypad
+while True:
+      # Read the keypad
+      key_${pin} = read_keypad()
+      if key_${pin} is not None:
+          # If a key_${pin} is pressed, print it
+          print(key_${pin})
+      # Sleep for a short period to debounce the keypad
+      time.sleep(0.1)
+`;
+  return code;
+};
+
+Blockly.Python['KEYPAD_VALUE'] = function (block) {
+  const pin = block.getFieldValue('pin');
+  var code = 'key_'+pin;
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python.LCD_TEST = function (block) {
+  const addr = block.getFieldValue('addr');
+  const size = block.getFieldValue('size');
+  Blockly.Python.definitions_['import_time'] = 'import time \nfrom machine import I2C, Pin\nfrom LiquidCrystal_I2C import LiquidCrystal_I2C';
+  let code = `i2c = I2C(scl=Pin(22), sda=Pin(21))\nlcd = LiquidCrystal_I2C(i2c, ${addr}, ${size})\nlcd.begin()\nlcd.backlight()`;
+  return code;
+};
+
+Blockly.Python.SET_CURSOR = function () {
+  var dropdown_CurSorRow = this.getFieldValue('CurSorRow');
+  var dropdown_LCD_I2C_CurSorCol = this.getFieldValue('CurSorCol');
+  var code = 'lcd.setCursor(' + dropdown_CurSorRow + ',' + dropdown_LCD_I2C_CurSorCol + ')\n';
+  return code;
+};
+
+Blockly.Python.LCD_CLEAR = function () {
+  var code = 'lcd.clear()\n';
+  return code;
+};
+
+Blockly.Python.LCD_PRINT_TEXT = function () {
+  var value_text = Blockly.Python.valueToCode(this, 'Text', Blockly.Python.ORDER_ATOMIC) || '\'\'';
+  var code = 'lcd.print(' + value_text + ')\n';
+  return code;
+};
+// -------------------จบของหมัด---------------------------
+// -----------tempesensor------------
+Blockly.Python.TEMP_SENSOR = function (block) {
+
+  const pin = block.getFieldValue('pin');
+ 
+  Blockly.Python.definitions_['define_ds18b20'] = `
+from machine import Pin
+import onewire, ds18x20, time`;
+  var code = `
+ds_pin_${pin} = machine.Pin(${pin})
+ds_sensor_${pin} = ds18x20.DS18X20(onewire.OneWire(ds_pin))
+roms${pin} = ds_sensor_${pin}.scan()
+temp${pin}_C = read_ds_sensor()
+temp${pin}_F = temp${pin}_C * (9/5) + 32.0
+temp${pin}_K =  temp${pin}_C + 271.15
+\n`;
+  return code;
+};
+
+Blockly.Python.ROMS_TEMP_SENSOR = function (block) {
+  var pin = block.getFieldValue('pin');
+
+  const roms = `roms${pin} = ds_sensor${pin}.scan()`;
+
+  var code = `${roms}`;
+
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+
+
+
+Blockly.Python.ds_sensor_read_temp = function (block) {
+  var pin = block.getFieldValue('pin');
+  var variable = Blockly.Python.valueToCode(block, 'var', Blockly.Python.ORDER_ATOMIC);
+  const ds_sensor= `ds_sensor_${pin}.read_temp${variable}`;
+
+  var code = `${ds_sensor}`;
+
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python.ROM_LOOP = function (block) {
+  var pin = block.getFieldValue('pin');
+
+  const rom = `rom_${pin}`;
+
+  var code = `${rom}`;
+
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+
+
+
+Blockly.Python.convert_temp = function (block) {
+
+  const pin = block.getFieldValue('pin');
+  var code = `ds_sensor_${pin}.convert_temp()\n`;
+  return code;
+};
+
+Blockly.Python.value_temp_senssor_C = function (block) {
+  var pin = block.getFieldValue('pin');
+  // const unit = block.getFieldValue('unit');
+  var code = `temp${pin}_C`;
+
+  return [code, Blockly.Python.ORDER_NONE];
+};
+Blockly.Python.value_temp_senssor_F = function (block) {
+  var pin = block.getFieldValue('pin');
+  // const unit = block.getFieldValue('unit');
+  var code = `temp${pin}_F`;
+
+  return [code, Blockly.Python.ORDER_NONE];
+};
+Blockly.Python.value_temp_senssor_K = function (block) {
+  var pin = block.getFieldValue('pin');
+  // const unit = block.getFieldValue('unit');
+  var code = `temp${pin}_K`;
+
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+// ------------- led ---------------
+Blockly.Python.led = function (block) {
+  const pin = block.getFieldValue('pin');
+  const state = block.getFieldValue('state');
+  // define
+  Blockly.Python.definitions_['import_machine'] = 'import machine';
+  Blockly.Python.definitions_[`define_led_${pin}`] = `led_${pin} = Pin(${pin},Pin.OUT)\n`;
+
+  // void loop()
+  let code = `led_${pin}.value(${state})`;
+
+  return code;
+};
+//------------led blink----------------
+Blockly.Python.led_blink = function (block) {
+  const pin = block.getFieldValue('pin');
+  const delay = block.getFieldValue('delay');
+  // define
+  Blockly.Python.definitions_['import_machine','import_time'] = 'import machine \n import_time';
+  Blockly.Python.definitions_[`define_led_blink${pin}`] = `led_blink${pin} = Pin(${pin},Pin.OUT)\n`;
+
+  // void loop()
+  let code = 
+  `led_blink${pin}.value(HIGH)
+  time.sleep(${delay})
+  led_blink${pin}.value(LOW)
+  time.sleep(${delay})`;
+  return code;
+};
+
+
+//----------------Buzzer--------------
+Blockly.Python.buzzer = function (block) {
+  const pin = block.getFieldValue('PINOUT');
+  const state = block.getFieldValue('state');
+  // define
+  Blockly.Python.definitions_['import_machine'] = 'import machine';
+  Blockly.Python.definitions_[`define_buzzer_${pin}`] = `buzzer_${pin} = Pin(${pin},Pin.OUT)\n`;
+
+  // void loop()
+  let code = `buzzer_${pin}.value(${state})`;
+
+  return code;
+};

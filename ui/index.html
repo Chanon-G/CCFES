@@ -454,6 +454,7 @@ document.body.appendChild(el);
       padding: 0;
       border: 1px solid #188;
       width: 80%;
+      border-radius: 50px;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
       -webkit-animation-name: animatetop;
       -webkit-animation-duration: 0.4s;
@@ -492,6 +493,8 @@ document.body.appendChild(el);
       float: right;
       font-size: 28px;
       font-weight: bold;
+      margin-top: 16px;
+      margin-right: 16px;
   font-family: 'Noto Sans Thai', sans-serif;
 
     }
@@ -504,21 +507,44 @@ document.body.appendChild(el);
     }
 
     .modal-header {
-      padding: 2px 16px;
+      padding: 4px 16px;
       background-color: rgb(0, 145, 255);
       color: white;
+      border-top-left-radius: 50px;
+      border-top-right-radius: 50px;
       font-family: 'Noto Sans Thai', sans-serif;
     }
 
     .modal-body {
-      padding: 2px 16px;
+      padding: 8px;
+      margin: 16px;
       font-family: 'Noto Sans Thai', sans-serif;
     }
 
     .modal-footer {
-      padding: 2px 16px;
+      padding: 4px;
       background-color: rgb(0, 145, 255);
       color: white;
+      border-bottom-left-radius: 50px;
+      border-bottom-right-radius: 50px;
+    }
+
+    .button-radius{
+      border-radius: 25px;
+      border: #ffffff;
+      padding: 8px 16px;
+
+    }
+
+    .button-radius:hover,
+    .button-radius:focus{
+      background-color: rgb(255, 0, 0);
+      color: #ffffff;
+    }
+
+    .top-header{
+      margin-top: 24px;
+      margin-left: 24px;
     }
   </style>
 
@@ -539,7 +565,7 @@ BIPES
     <div class="modal-content">
       <div class="modal-header">
         <span class="closeM">&times;</span>
-        <h2>ยินดีต้อนรับเข้าสู่เว็บไซต์ CCFES!</h2>
+        <h2 class="top-header">ยินดีต้อนรับเข้าสู่เว็บไซต์ CCFES!</h2>
       </div>
       <div class="modal-body">
         <p><b>ปริญญานิพนธ์ : การแปลโปรแกรมข้ามเครื่องสำหรับระบบฝังตัว  </B><br>
@@ -559,7 +585,11 @@ BIPES
           อย่าแสดงสิ่งนี้อีก
           <br>
           <br>
-          <button onclick="closeModal()">Close</button>
+          <button 
+              onclick="closeModal()"
+              class="button-radius"
+              >Close
+            </button>
 
           <br>
           <br>
