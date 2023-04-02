@@ -12352,8 +12352,8 @@ Blockly.Blocks['led'] = {
           .setAlign(Blockly.ALIGN_RIGHT)
           .appendField("state =")
           .appendField(new Blockly.FieldDropdown([
-              ["HIGH", "HIGH"],
-              ["LOW", "LOW"]
+              ["HIGH", "True"],
+              ["LOW", "False"]
           ]), "state");
       this.setInputsInline(false);
       this.setPreviousStatement(true, null);

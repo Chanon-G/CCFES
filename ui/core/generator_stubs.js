@@ -5945,14 +5945,12 @@ Blockly.Python.tact_sw_init = function (block) {
   const pin = block.getFieldValue('pin');
   // TODO: Assemble JavaScript into code variable.
   //define
-  const tsw_pin = `TSW_${pin}`;
-  const tsw_state = `TSW_${pin}_state`;
 
-  Blockly.Python.definitions_['import_machine'] = 'import machine';
-  Blockly.Python.definitions_['define_sw_' + pin] = `${tsw_pin} = Pin(${pin},Pin.IN)\n`;
+  Blockly.Python.definitions_['import_pin'] = 'from machine import Pin \n';
+  Blockly.Python.definitions_[`define_button_${pin}`] = `push_button_${pin} = Pin(${pin}, Pin.IN)\n`;
   //setup
 
-  let code = `${tsw_state} = ${tsw_pin}.value()\n`;
+  let code = `logic_state_${pin} = push_button_${pin}.value()\n`;
   return code;
 };
 
@@ -5961,7 +5959,7 @@ Blockly.Python.tact_sw_init = function (block) {
 Blockly.Python.tact_sw_val = function (block) {
   var pin = block.getFieldValue('pin');
 
-  const tsw_state = `TSW_${pin}_state`;
+  const tsw_state = `logic_state_${pin}`;
 
   var code = `${tsw_state}`;
 
@@ -6137,32 +6135,43 @@ Blockly.Python.value_temp_senssor_K = function (block) {
 };
 
 // ------------- led ---------------
-Blockly.Python.led = function (block) {
+Blockly.Python['led'] = function(block) {
   const pin = block.getFieldValue('pin');
   const state = block.getFieldValue('state');
-  // define
-  Blockly.Python.definitions_['import_machine'] = 'import machine';
-  Blockly.Python.definitions_[`define_led_${pin}`] = `led_${pin} = Pin(${pin},Pin.OUT)\n`;
 
-  // void loop()
-  let code = `led_${pin}.value(${state})`;
+  Blockly.Python.definitions_['import_pin'] = 'from machine import Pin';
+  Blockly.Python.definitions_[`define_LED${pin}`] = 
+  `def gpio_set(pin,value):
+    if value >= 1:
+      Pin(pin, Pin.OUT).on()  
+    else:
+      Pin(pin, Pin.OUT).off() 
+  `;
+
+  let code =   `  gpio_set((${pin}), ${state})\n`;
 
   return code;
 };
-//------------led blink----------------
-Blockly.Python.led_blink = function (block) {
+
+Blockly.Python['led_blink'] = function(block) {
   const pin = block.getFieldValue('pin');
   const delay = block.getFieldValue('delay');
-  // define
-  Blockly.Python.definitions_['import_machine','import_time'] = 'import machine \n import_time';
-  Blockly.Python.definitions_[`define_led_blink${pin}`] = `led_blink${pin} = Pin(${pin},Pin.OUT)\n`;
 
-  // void loop()
-  let code = 
-  `led_blink${pin}.value(HIGH)
-  time.sleep(${delay})
-  led_blink${pin}.value(LOW)
-  time.sleep(${delay})`;
+  Blockly.Python.definitions_['import_pin'] = 'from machine import Pin';
+  Blockly.Python.definitions_['import_utime'] = 'import utime';
+  Blockly.Python.definitions_[`define_LED_Blink${pin}`] = 
+  `def gpio_set(pin,value):
+    if value >= 1:
+      Pin(pin, Pin.OUT).on()
+    else:
+      Pin(pin, Pin.OUT).off()
+  `;
+
+  let code =   `gpio_set((${pin}), True)\n`;
+      code +=  `utime.sleep(${delay})\n`;
+      code +=  `gpio_set((${pin}), False)\n`;
+      code +=  `utime.sleep(${delay})\n`;
+
   return code;
 };
 
