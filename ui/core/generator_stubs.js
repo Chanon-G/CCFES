@@ -6141,14 +6141,14 @@ Blockly.Python['led'] = function(block) {
 
   Blockly.Python.definitions_['import_pin'] = 'from machine import Pin';
   Blockly.Python.definitions_[`define_LED${pin}`] = 
-  `def gpio_set(pin,value):
+  `def gpio_setLED(pin,value):
     if value >= 1:
       Pin(pin, Pin.OUT).on()  
     else:
       Pin(pin, Pin.OUT).off() 
   `;
 
-  let code =   `  gpio_set((${pin}), ${state})\n`;
+  let code =`gpio_setLED((${pin}), ${state})\n`;
 
   return code;
 };
@@ -6177,15 +6177,35 @@ Blockly.Python['led_blink'] = function(block) {
 
 
 //----------------Buzzer--------------
+Blockly.Python.buzzer_Blink = function (block) {
+  const pin = block.getFieldValue('PINOUT');
+  const delay = block.getFieldValue('delay');
+
+  Blockly.Python.definitions_['import_pin'] = 'from machine import Pin, PWM';
+  Blockly.Python.definitions_['import_utime'] = 'import utime';
+  Blockly.Python.definitions_[`define_buzzerBlink_${pin}`] = 
+  `buzzerBlink = PWM(Pin(${pin},Pin.OUT))\nbuzzerBlink.init(freq=1047, duty=0)
+  `;
+
+  let code =   `buzzerBlink.duty(512)\n`;
+      code +=  `utime.sleep(${delay})\n`;
+      code +=  `buzzerBlink.duty(0)\n`;
+      code +=  `utime.sleep(${delay})\n`;
+
+  return code;
+};
+
 Blockly.Python.buzzer = function (block) {
   const pin = block.getFieldValue('PINOUT');
   const state = block.getFieldValue('state');
-  // define
-  Blockly.Python.definitions_['import_machine'] = 'import machine';
-  Blockly.Python.definitions_[`define_buzzer_${pin}`] = `buzzer_${pin} = Pin(${pin},Pin.OUT)\n`;
 
-  // void loop()
-  let code = `buzzer_${pin}.value(${state})`;
+  Blockly.Python.definitions_['import_pin'] = 'from machine import Pin, PWM';
+  Blockly.Python.definitions_['import_utime'] = 'import utime';
+  Blockly.Python.definitions_[`define_buzzer_${pin}`] = 
+  `buzzer = PWM(Pin(${pin},Pin.OUT))\nbuzzer.init(freq=1047, duty=0)
+  `;
+
+  let code =   `buzzer.duty(${state})\n`;
 
   return code;
 };

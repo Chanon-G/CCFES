@@ -1388,6 +1388,8 @@
 			</block>
 		</category>
 		<category name="Buzzer">
+			<block type="buzzer_Blink">
+			</block>
 			<block type="buzzer">
 			</block>
 		</category>
