@@ -6027,8 +6027,8 @@ Blockly.Python['KEYPAD_VALUE'] = function (block) {
 Blockly.Python.LCD_TEST = function (block) {
   const addr = block.getFieldValue('addr');
   const size = block.getFieldValue('size');
-  Blockly.Python.definitions_['import_time'] = 'import time \nfrom machine import I2C, Pin\nfrom LiquidCrystal_I2C import LiquidCrystal_I2C';
-  let code = `i2c = I2C(scl=Pin(22), sda=Pin(21))\nlcd = LiquidCrystal_I2C(i2c, ${addr}, ${size})\nlcd.begin()\nlcd.backlight()`;
+  Blockly.Python.definitions_['import_time'] = 'import time \nfrom machine import I2C, Pin\nimport i2c_lcd_backlight \nimport i2c_lcd_screen';
+  let code = `i2c = I2C(scl=Pin(22), sda=Pin(21))\nlcd = LiquidCrystal_I2C(i2c, ${addr}, ${size})\nlcd.begin()\nlcd.backlight()\n`;
   return code;
 };
 
@@ -6209,3 +6209,126 @@ Blockly.Python.buzzer = function (block) {
 
   return code;
 };
+/* ======================== NTC SENSOR ======================== */
+
+//* Block เอาไว้กำหนดขา แล้วค่าตัว R
+Blockly.Python.ntc_config = function (block) {
+  const R_NTC =
+      Blockly.Python.valueToCode(
+          this,
+          "R_NTC",
+          Blockly.Python.ORDER_ATOMIC
+      ) || "''";
+  const R = Blockly.Python.valueToCode(
+      this,
+      "R",
+      Blockly.Python.ORDER_ATOMIC
+  );
+  const pin = block.getFieldValue("pin");
+  /*
+define ที่ใช้ร่วมกัน
+    - B
+    - VCC
+    - LN
+    - Temperature0
+    - 
+*/
+  Blockly.Python.definitions_["define_ntc_config"] =
+      "from machine import Pin, ADC\n" +
+      "import math\n" +
+      "B = 3977      // K\n" +
+      "VCC = 3.3    //Supply voltage\n" +
+      "Temperature0 = 25+273.15; \n";
+
+  /*
+define แยกกัน
+    - Read
+    - VR
+    - RT
+    - Temp
+*/
+  const RT0 = `RT0_${pin}`;
+  const PIN_NTC = `PIN_NTC_${pin}`;
+  const R0 = "R_" + pin;
+  const Read = "Read_" + pin;
+  const VR = "VR_" + pin;
+  const RT = "RT_" + pin;
+  const Temp = "Temp_" + pin;
+  //TEMP
+  const cel = `Cel_${pin}`;
+  const fah = `Fah_${pin}`;
+  const kel = `Kel_${pin}`;
+  const ln = `ln_${pin}`;
+  const adc = `adc_${pin}`;
+  const setup = `setup_ntc_${pin}`;
+  const loop = `loop_ntc_${pin}`;
+
+  Blockly.Python.definitions_[
+      "define_ntc_config_" + PIN_NTC
+  ] = `${RT0} = ${R_NTC}
+${PIN_NTC} = Pin(${pin})
+${R0} = ${R}
+${Read} = 0
+${VR} = 0
+${RT} = 0
+${Temp} = 0
+${ln} = 0
+${cel} = 0
+${kel} = 0
+${fah} = 0
+${adc} = ADC(${PIN_NTC})
+def ${setup}():
+  global Temperature0
+  Temperature0 = 25+273.15
+  ${adc}.atten(ADC.ATTN_11DB)
+  ${adc}.width(ADC.WIDTH_10BIT)
+def ${loop}():
+  global ${Read}, ${VR}, ${RT}, ${Temp}, ${ln}, ${cel}, ${kel}, ${fah}
+  ${Read} = ${adc}.read()
+  ${Read} = (5.00 / 1023.00) * ${Read}
+  ${VR} = VCC - ${Read}
+  ${RT} = ${Read} / (${VR} / ${R0})
+  ${ln} = math.log(${RT} / ${RT0})
+  ${Temp} = (1 / ((${ln} / B) + (1 / Temperature0)))
+  ${cel} = ${Temp} - 273.15
+  ${kel} = ${Temp}
+  ${fah} = (${Temp} * 1.8) + 32
+${setup}()`;
+
+  var code = `    ${loop}()\n`;
+
+  return code;
+};
+
+// * แสดงองศาผ่าน Serial Monitor
+Blockly.Python.ntc_showTemp = function (block) {
+  const unit = block.getFieldValue("unit");
+  const pin = block.getFieldValue("pin");
+  const text = Blockly.Python.valueToCode(
+      block,
+      "text",
+      Blockly.Python.ORDER_ATOMIC
+  );
+
+  Blockly.Python.definitions_["lib_uart"] = `import uart
+uart.init(115200)`;
+
+  // TODO: Assemble JavaScript into code variable.
+  let code = "";
+  if (text != "") {
+      code = `    uart.write(${text})\n`;
+  }
+  code += `    uart.write(str(${unit}_${pin}))\n`;
+  return code;
+};
+
+// * Bloce Value
+Blockly.Python.ntc_value = function (block) {
+  const unit = block.getFieldValue("unit");
+  const pin = block.getFieldValue("pin");
+  // TODO: Assemble JavaScript into code variable.
+  let code = `${unit}_${pin}`;
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.Python.ORDER_NONE];
+};
+/* END NTC SENSOR ================================================ */

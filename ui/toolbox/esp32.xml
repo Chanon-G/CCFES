@@ -1344,6 +1344,10 @@
 			</block>
 		</category>
 		<category name="LCD_I2C" >
+			<label text="Library: https://github.com/dhylands/python_lcd">
+			</label>
+			<button text="Install I2CLCD library" callbackKey="installPyLib">
+			</button>
 			<block type="LCD_TEST">
 			</block>
 			<block type="SET_CURSOR">
@@ -1388,6 +1392,10 @@
 			</block>
 		</category>
 		<category name="Buzzer">
+			<label text="Library: ">
+			</label>
+			<button text="Install rtttl library" callbackKey="installPyLib">
+			</button>
 			<block type="buzzer_Blink">
 			</block>
 			<block type="buzzer">
